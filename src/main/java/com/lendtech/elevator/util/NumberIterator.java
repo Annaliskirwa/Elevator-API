@@ -1,4 +1,4 @@
-package com.challenge.elevator.util;
+package com.lendtech.elevator.util;
 
 import java.util.Iterator;
 

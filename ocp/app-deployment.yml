@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lendtech-elevator-api
+spec:
+  selector:
+    matchLabels:
+      app: lendtech-elevator-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: lendtech-elevator-api
+    spec:
+      volumes:
+      - name: logback-mount
+        configMap:
+          name: lendtech-elevator-api-logback-configmap
+          defaultMode: 420
+      containers:
+        - name: lendtech-elevator-api
+          image: docker.io/kirwa9431/lendtech-elevator-api:tuesday
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+          - name: logback-mount
+            mountPath: /mnt/logback/
+          env:
+            - name: JDBC_URL
+              value: jdbc:h2:mem:mydb
+            - name: DATABASE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: lendtech-elevator-api
+                  key: jdbc.username
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: lendtech-elevator-api
+                  key: jdbc.password
+            - name: API_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: lendtech-elevator-api
+                  key: api.password
+            - name: API_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: lendtech-elevator-api
+                  key: api.username
+            - name: ELEVATOR_MAX_FLOOR
+              value: '10'
+          imagePullPolicy: IfNotPresent

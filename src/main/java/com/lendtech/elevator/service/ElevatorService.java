@@ -1,6 +1,6 @@
-package com.challenge.elevator.service;
+package com.lendtech.elevator.service;
 
-import com.challenge.elevator.entity.Elevator;
+import com.lendtech.elevator.entity.Elevator;
 
 import java.util.List;
 

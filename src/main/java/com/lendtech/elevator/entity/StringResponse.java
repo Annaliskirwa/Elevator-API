@@ -1,4 +1,4 @@
-package com.challenge.elevator.entity;
+package com.lendtech.elevator.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

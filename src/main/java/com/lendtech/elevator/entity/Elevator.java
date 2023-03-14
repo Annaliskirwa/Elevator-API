@@ -1,13 +1,9 @@
-package com.challenge.elevator.entity;
+package com.lendtech.elevator.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.ToString;
-import org.springframework.beans.factory.annotation.Value;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @AllArgsConstructor
 @Data
@@ -23,6 +19,7 @@ public class Elevator {
     private ElevatorDirection direction;
     private boolean isMoving;
     private ElevatorDoorState elevatorDoorState;
+
     private int maxFloor;
 
     public Elevator() {

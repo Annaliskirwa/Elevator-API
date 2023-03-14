@@ -1,4 +1,4 @@
-package com.challenge.elevator.entity;
+package com.lendtech.elevator.entity;
 
 public enum ElevatorDoorState {
     OPEN, OPENING, CLOSING, CLOSED

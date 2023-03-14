@@ -1,8 +1,9 @@
-package com.challenge.elevator.controller;
+package com.lendtech.elevator.controller;
 
-import com.challenge.elevator.entity.Elevator;
-import com.challenge.elevator.entity.StringResponse;
-import com.challenge.elevator.service.ElevatorService;
+import com.lendtech.elevator.entity.Elevator;
+import com.lendtech.elevator.entity.StringResponse;
+import com.lendtech.elevator.service.ElevatorService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/elevator")
 public class ElevatorController {
@@ -26,14 +28,15 @@ public class ElevatorController {
     }
 
     @PostMapping("/add-elevator")
-    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<StringResponse> addElevator() {
         Elevator elevator = new Elevator();
         elevator.setMaxFloor(maxFloor);
         Elevator created = elevatorService.saveElevator(elevator);
         if (null != created) {
+            log.info("-----------------------[ADDING ELEVATOR SUCCESS]---------------------\n{}", created);
             return new ResponseEntity<>(new StringResponse("Elevator Added Successfully"), HttpStatus.OK);
         } else {
+            log.info("-----------------------[ADDING ELEVATOR ERROR]---------------------\n");
             return new ResponseEntity<>(new StringResponse("Elevator could not be added."),HttpStatus.BAD_REQUEST);
         }
     }
@@ -42,8 +45,10 @@ public class ElevatorController {
                                                @RequestParam("elevatorID") Long elevatorID) {
         boolean success = elevatorService.callElevator(elevatorID, destinationFloor);
         if (success) {
+            log.info("-----------------------[ELEVATOR CALLED SUCCESSFULLY]---------------------\n");
             return new ResponseEntity<>(new StringResponse("Elevator Called Successfully"), HttpStatus.OK);
         } else {
+            log.info("-----------------------[ELEVATOR COULD NOT BE CALLED]---------------------\n");
             return new ResponseEntity<>(new StringResponse("Elevator could not be called"),HttpStatus.BAD_REQUEST);
         }
     }
@@ -52,10 +57,11 @@ public class ElevatorController {
     public ResponseEntity<List<Elevator>> getElevatorStatus() {
         List<Elevator> elevator = elevatorService.getAllElevators();
         if (!elevator.isEmpty()) {
+            log.info("-----------------------[ELEVATOR STATUS]---------------------\n{}", elevator);
             return ResponseEntity.ok(elevator);
         } else {
+            log.info("-----------------------[ELEVATOR STATUS NOT FOUND]---------------------\n{}", elevator);
             return ResponseEntity.notFound().build();
         }
     }
-
 }

@@ -1,4 +1,4 @@
-package com.challenge.elevator.entity;
+package com.lendtech.elevator.entity;
 
 public enum ElevatorDirection {
     UP, DOWN, STOPPED

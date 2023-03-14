@@ -1,0 +1,30 @@
+spring:
+  h2:
+    console:
+      enabled: 'true'
+  datasource:
+    url: ${JDBC_URL:jdbc:h2:mem:mydb}
+    username: ${DATABASE_USERNAME:sa}
+    password: ${DATABASE_PASSWORD:password}
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        format_sql: 'true'
+    show-sql: 'true'
+elevator:
+  max:
+    floor: ${ELEVATOR_MAX_FLOOR:10}
+logging:
+  config: /mnt/logback/logback.xml
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: TRACE
+
+app-properties:
+  api-username: ${API_USERNAME:admin}
+  api-password: ${API_PASSWORD:admin}

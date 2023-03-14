@@ -1,6 +1,6 @@
-package com.challenge.elevator.repository;
+package com.lendtech.elevator.repository;
 
-import com.challenge.elevator.entity.Elevator;
+import com.lendtech.elevator.entity.Elevator;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
